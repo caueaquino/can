@@ -1,1 +1,196 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.can {
+    &-auth {
+        &-layout {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(45deg, #7700ff, #ff004c);
+        }
+        
+
+        &-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 720px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            box-shadow: 1px 3px 10px #00000080;
+        
+            &-content {
+                display: flex;
+                flex-direction: column;
+                width: 480px;
+            }
+
+            &-image {
+                padding: 16px 32px;
+            }
+
+            &-title {
+                font-size: 2em;
+                padding: 16px 0px 8px 0px;
+            }
+
+            &-sub-title {
+                font-size: 1.5em;
+                padding-bottom: 32px;
+            }
+
+            &-row {
+                display: flex;
+                flex-direction: row;
+
+                &-buttons {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 32px 0px 16px 0px;
+                }
+            }  
+        }
+        
+        &-error-text {
+            width: calc(100% - 22px);
+            text-align: center;
+            font-size: 1.2em;
+            margin: 0px 8px;
+            padding: 4px;
+            color: #ffffff;
+            background-color: #ff0000;
+            border-radius: 4px;
+        }
+
+        &-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            color: red;
+            position: absolute;
+            bottom: 0;
+
+            &-text {
+                color: #000000;
+                font-style: italic;
+                font-size: 0.8em;
+                font-weight: 600;
+                
+                a {
+                    color: #000000;
+                    padding: 0px 4px;
+
+                    &:hover {
+                        color: #020091;
+                    }
+                }
+            }
+        }
+    }
+
+    &-main {
+        &-layout {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+    }
+
+    &-container {
+        &-column {
+            display: flex;
+            flex-direction: column;
+
+            &-center {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        &-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &-label {
+        width: calc(100% - 16px);
+        display: flex;
+        flex-direction: column;
+        font-size: 1.1em;
+        font-weight: 500;
+        padding: 8px;
+    }
+    
+    &-input {
+        width: calc(100% - 16px);
+        height: 28px;
+        font-size: 1.1em;
+        border-radius: 4px;
+        border: 1px solid #000000;
+        background-color: #f5f5f5;
+        padding: 2px 8px;
+    }
+
+    &-button {
+        &-black {
+            font-size: 1.1em;
+            border-radius: 4px;
+            padding: 4px 8px;
+            color: #ffffff;
+            background-color: #000000;
+            border: 1px solid #ffffff00;
+            min-width: 150px;
+            margin: 8px;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+
+        &-white {
+            font-size: 1.1em;
+            border-radius: 4px;
+            padding: 4px 8px;
+            color: #000000;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            min-width: 150px;
+            margin: 8px;
+            
+            &:hover {
+                background-color: #e7e7e7;
+                opacity: 0.9;
+            }
+        }
+
+        &-link {
+            font-size: 1.1em;
+            color: #000000;
+            padding: 8px;
+            text-decoration: underline;
+            font-style: italic;
+
+            &:hover {
+                color: #020091;
+            }
+        }
+    }
+}
