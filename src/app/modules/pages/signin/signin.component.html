@@ -2,7 +2,7 @@
 
     <h2 class="can-auth-container-sub-title">Member Login</h2>
 
-    <p *ngIf="isAuthErrorActive && signinForm.invalid" class="can-auth-error-text">Invalid fields.</p>
+    <p *ngIf="authError" class="can-auth-error-text">Invalid fields.</p>
 
     <label class="can-label">
         User
@@ -18,6 +18,6 @@
     <div class="can-auth-container-row-buttons">
         <a class="can-button-link" routerLink="/recover-password">Forgot password?</a>
 
-        <button class="can-button-black" (click)="doLogin()">Login</button>
+        <button class="can-button-black" (click)="login()">Login</button>
     </div>
 </form>
