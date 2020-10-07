@@ -14,6 +14,10 @@ export class AuthLayoutComponent {
     this.setActualYear();
   }
 
+  /**
+   * @description Set the actual year value to the actualYear variable.
+   * @returns Void.
+   */
   private setActualYear(): void {
     const actualDate = new Date();
     this.actualYear = actualDate.getFullYear();

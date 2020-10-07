@@ -22,4 +22,4 @@ export class User {
         this.github = user.github ?? null;
         this.language = user.language ?? null;
     }
-}
+ }

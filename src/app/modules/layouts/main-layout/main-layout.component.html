@@ -1,1 +1,16 @@
-<p>main-layout works!</p>
+<div class="can-main-layout">
+    <div class="can-main-header">
+
+        <a class="can-main-menu-item" routerLink="/can/home" routerLinkActive="can-main-active-menu">Home</a>
+        
+        <a class="can-main-menu-item" routerLink="/can/videos" routerLinkActive="can-main-active-menu">Videos</a>
+        
+        <h1 class="can-main-title">CAN</h1>
+        
+        <a class="can-main-menu-item" routerLink="/can/profile" (click)="openProfile()" routerLinkActive="can-main-active-menu">Profile</a>
+
+        <a class="can-main-menu-item" (click)="authService.logout()">Logout</a>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>
