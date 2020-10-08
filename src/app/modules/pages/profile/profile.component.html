@@ -1,1 +1,58 @@
-<p>profile works!</p>
+<div class="can-page">
+
+    <form [formGroup]="userForm" class="can-page-card">
+
+        <div class="can-container-profile">
+            <div class="can-container-profile-avatar">
+                <ngx-avatar name="{{name.value}} {{lastName.value}}" [src]="avatarUrl.value" borderColor="black" size="250"></ngx-avatar>
+            </div>
+
+            <div class="can-container-column-end">
+                <label class="can-label">
+                    Avatar Url:
+                    <input placeholder="Avatar url" formControlName="avatarUrl" class="can-input" />
+                </label>
+
+                <label class="can-label">
+                    Language:
+                    <select formControlName="language" class="can-input">
+                        <option [ngValue]="1">Portugues (Brasil)</option>
+                        <option [ngValue]="2">English (USA)</option>
+                        <option [ngValue]="3">Spanish</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="can-container-row">
+            <label class="can-label">
+                Name:
+                <input placeholder="Name" formControlName="name" class="can-input" />
+            </label>
+
+            <label class="can-label">
+                Last Name:
+                <input placeholder="Lastname" formControlName="lastName" class="can-input" />
+            </label>
+        </div>
+
+        <div class="can-container-row">
+            <label class="can-label">
+                Email:
+                <input placeholder="Email" formControlName="email" class="can-input" />
+            </label>
+
+            <label class="can-label">
+                Password:
+                <input placeholder="Password" type="password" formControlName="password" class="can-input" />
+            </label>
+        </div>
+
+        <div class="can-container-row-center" style="margin-top: 16px; justify-content: space-around;">
+            <button class="{{isEditing ? 'can-button-white' : 'can-button-black'}}"
+                (click)="changeFormState()">{{isEditing ? 'Cancel' : 'Edit'}}</button>
+            <button *ngIf="isEditing" class="can-button-black" (click)="saveProfileChanges()">Save</button>
+        </div>
+    </form>
+
+</div>

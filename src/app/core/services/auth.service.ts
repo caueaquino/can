@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
+import { delay, switchMap } from 'rxjs/operators';
 
+import { User } from 'src/app/shared/models/user.model';
 import { Token } from 'src/app/shared/models/token.model';
 import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
 import { UtilService } from 'src/app/core/services/util.service';
-import { User } from 'src/app/shared/models/user.model';
-import { delay, switchMap } from 'rxjs/operators';
 
 
 @Injectable({ providedIn: 'root' })

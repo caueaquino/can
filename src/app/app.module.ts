@@ -4,13 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AvatarModule } from 'ngx-avatar';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 
 import { AppComponent } from 'src/app/app.component';
 import { HomeComponent } from 'src/app/modules/pages/home/home.component';
-import { JobsComponent } from 'src/app/modules/pages/jobs/jobs.component';
 import { SigninComponent } from 'src/app/modules/pages/signin/signin.component';
 import { SignupComponent } from 'src/app/modules/pages/signup/signup.component';
+import { VideosComponent } from 'src/app/modules/pages/videos/videos.component';
 import { ProfileComponent } from 'src/app/modules/pages/profile/profile.component';
 import { MainLayoutComponent } from 'src/app/modules/layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from 'src/app/modules/layouts/auth-layout/auth-layout.component';
@@ -20,7 +21,6 @@ import { RecoverPasswordComponent } from 'src/app/modules/pages/recover-password
 import { TokenInterceptor } from 'src/app/core/interceptors/token.interceptor';
 import { ErrorInterceptor } from 'src/app/core/interceptors/error.interceptor';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { VideosComponent } from './modules/pages/videos/videos.component';
 
 
 @NgModule({
@@ -35,7 +35,6 @@ import { VideosComponent } from './modules/pages/videos/videos.component';
     CanLoadingComponent,
     CanDialogComponent,
     ProfileComponent,
-    JobsComponent,
     VideosComponent
   ],
   imports: [
@@ -45,6 +44,7 @@ import { VideosComponent } from './modules/pages/videos/videos.component';
     ReactiveFormsModule,
     PasswordStrengthMeterModule,
     BrowserAnimationsModule,
+    AvatarModule,
   ],
   providers:  [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
