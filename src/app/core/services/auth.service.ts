@@ -71,6 +71,15 @@ export class AuthService {
     }
 
     /**
+     * @description Do a request using refresh token to renew access token of section.
+     * @returns Returns an Observable of HttpRequestResult model with token data into it on data property.
+     */
+    public doRefreshToken(): Observable<HttpRequestResult<Token>> {
+        const url = `${this.BASE_URL}login.json`;
+        return this.http.get<HttpRequestResult<Token>>(url);
+    }
+
+    /**
      * @description Get token data from api and return an Observable of the request result.
      * @param user User model.
      * @returns Returns an Observable of a HttpRequestResult model with Token data into it on data property.

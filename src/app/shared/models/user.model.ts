@@ -10,16 +10,14 @@ export class User {
     avatarUrl: string;
     language: ELanguage;
 
-    constructor(user: User) {
-        if (user) {
-            this.id = user.id ?? null;
-            this.name = user.name ?? null;
-            this.lastName = user.lastName ?? null;
-            this.userName = user.userName ?? null;
-            this.password = user.password ?? null;
-            this.email = user.email ?? null;
-            this.avatarUrl = user.avatarUrl ?? null;
-            this.language = user.language ?? null;
-        }
+    constructor(user?: User) {
+        this.id = user?.id ?? null;
+        this.name = user?.name ?? null;
+        this.lastName = user?.lastName ?? null;
+        this.userName = user?.userName ?? null;
+        this.password = user?.password ?? null;
+        this.email = user?.email ?? null;
+        this.avatarUrl = user?.avatarUrl ?? null;
+        this.language = user?.language ?? null;
     }
- }
+}
