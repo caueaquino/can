@@ -2,7 +2,7 @@
 
     <h2 class="can-auth-container-sub-title">Member Login</h2>
 
-    <p *ngIf="authError" class="can-auth-error-text">Invalid fields.</p>
+    <p *ngIf="authError || isAuthErrorActive" class="can-auth-error-text">Invalid fields.</p>
 
     <label class="can-label">
         User

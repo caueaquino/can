@@ -6,6 +6,7 @@ import { User } from 'src/app/shared/models/user.model';
 import { Videos } from 'src/app/shared/models/videos.model';
 import { UserService } from 'src/app/core/services/user.service';
 import { VideoService } from 'src/app/core/services/video.service';
+import { CanDialogService } from 'src/app/modules/components/can-dialog/can-dialog.service';
 import { CanloadingService } from 'src/app/modules/components/can-loading/can-loading.service';
 
 
@@ -23,6 +24,7 @@ export class VideosComponent implements OnInit {
     private videoService: VideoService,
     private userService: UserService,
     private canLoadingService: CanloadingService,
+    private canDialogService: CanDialogService,
   ) {
     this.videoForm = this.formBuilder.group({
       title: [null, Validators.required],
@@ -62,13 +64,18 @@ export class VideosComponent implements OnInit {
     this.setCreationUser();
   }
 
+  public setVideoUrl(): void {
+    const containerVideo = document.querySelector(`#containerVideo`);
+    containerVideo.innerHTML = `<iframe width="853" height="480" src="${this.videoUrl.value}?autoplay=true" frameborder="0" allow="accelerometer; autoplay="true"; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  }
 
   public saveNewVideo(): void {
     const newVideo = this.videoForm.getRawValue() as Videos;
 
     this.canLoadingService.handleLoad(this.videoService.addVideo(newVideo))
       .subscribe(() => {
-
+        this.canDialogService.openDialog('Success', 'Video was posted successfully');
+        this.resetFormState();
       }, (error: HttpErrorResponse) => {
         console.error(error);
       });
@@ -84,6 +91,6 @@ export class VideosComponent implements OnInit {
   }
 
   private resetFormState(): void {
-
+    this.videoForm.reset();
   }
 }

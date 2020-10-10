@@ -7,6 +7,7 @@ import { User } from 'src/app/shared/models/user.model';
 import { Token } from 'src/app/shared/models/token.model';
 import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
 import { CanloadingService } from 'src/app/modules/components/can-loading/can-loading.service';
+import { CanDialogService } from 'src/app/modules/components/can-dialog/can-dialog.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UtilService } from 'src/app/core/services/util.service';
 
@@ -28,6 +29,7 @@ export class SigninComponent {
     private authService: AuthService,
     private utilService: UtilService,
     private canLoadingService: CanloadingService,
+    private canDialog: CanDialogService,
   ) {
     this.signinForm = this.formBuilder.group({
       userName: [null, [Validators.required, Validators.minLength(4)]],
@@ -92,10 +94,12 @@ export class SigninComponent {
         this.authService.storeCanTokens(res.data);
         this.router.navigate(['can/home']);
       }, (error: HttpErrorResponse) => {
+        console.error(error);
+        this.canDialog.openDialog('Error', 'Was not possible to complete login.');
         if (error.status === 401) {
           this.authError = true;
+          return;
         }
-        console.error(error);
       });
   }
 }

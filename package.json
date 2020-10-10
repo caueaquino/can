@@ -22,6 +22,7 @@
     "angular-password-strength-meter": "^2.0.0",
     "jsencrypt": "^3.0.0-rc.1",
     "ngx-avatar": "^4.0.0",
+    "ngx-dialogs": "^1.0.2",
     "ngx-spinner": "^10.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

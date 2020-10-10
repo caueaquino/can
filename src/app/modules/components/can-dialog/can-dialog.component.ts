@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Ngxalert } from 'ngx-dialogs';
+
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'can-dialog',
@@ -8,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CanDialogComponent implements OnInit {
 
+  private alert: Ngxalert = new Ngxalert();
+
   constructor() { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
+
+
 
 }

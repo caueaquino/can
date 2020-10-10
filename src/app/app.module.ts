@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AvatarModule } from 'ngx-avatar';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxDialogsModule } from 'ngx-dialogs';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 
 import { AppComponent } from 'src/app/app.component';
@@ -49,6 +50,7 @@ import { SafePipe } from 'src/app/shared/pipes/safe.pipe';
     BrowserAnimationsModule,
     AvatarModule,
     NgxSpinnerModule,
+    NgxDialogsModule,
   ],
   providers:  [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

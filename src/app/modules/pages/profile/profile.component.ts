@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
 import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
 import { CanloadingService } from 'src/app/modules/components/can-loading/can-loading.service';
+import { CanDialogService } from 'src/app/modules/components/can-dialog/can-dialog.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 
@@ -24,6 +25,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private canLoadingService: CanloadingService,
+    private canDialog: CanDialogService,
   ) {
     this.userData.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.userForm = this.formBuilder.group({
@@ -125,6 +127,7 @@ export class ProfileComponent implements OnInit {
       return;
     }
     this.userData = this.userForm.getRawValue() as User;
+    this.canDialog.openDialog('Success', 'Profile data was updated successfully.');
     this.changeFormState();
   }
 

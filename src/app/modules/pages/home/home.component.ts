@@ -40,9 +40,12 @@ export class HomeComponent implements OnInit {
   }
 
   public commentVideo(video: Videos): void {
-    const inputValue = document.querySelector(`#inputComment${video.id}`);
-    video.comments.push(inputValue.value);
-    inputValue.value = '';
+    this.setCommentValue(document.getElementById(`inputComment${video.id}`), video);
+  }
+
+  private setCommentValue(input: any, video: Videos): void {
+    video.comments.push(input.value);
+    input.value = '';
   }
 
 }
