@@ -76,7 +76,7 @@ export class AuthService {
      */
     public doRefreshToken(): Observable<HttpRequestResult<Token>> {
         const url = `${this.BASE_URL}login.json`;
-        return this.http.get<HttpRequestResult<Token>>(url);
+        return this.http.get<HttpRequestResult<Token>>(url).pipe(delay(1000));
     }
 
     /**

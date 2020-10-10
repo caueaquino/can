@@ -6,6 +6,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { User } from 'src/app/shared/models/user.model';
 import { Token } from 'src/app/shared/models/token.model';
 import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
+import { CanloadingService } from 'src/app/modules/components/can-loading/can-loading.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UtilService } from 'src/app/core/services/util.service';
 
@@ -26,6 +27,7 @@ export class SigninComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private utilService: UtilService,
+    private canLoadingService: CanloadingService,
   ) {
     this.signinForm = this.formBuilder.group({
       userName: [null, [Validators.required, Validators.minLength(4)]],
@@ -67,10 +69,8 @@ export class SigninComponent {
    * @returns Void.
    */
   private getPublickeyRsa(): void {
-    this.authService.getRsaPublicKey()
+    this.canLoadingService.handleLoad(this.authService.getRsaPublicKey())
       .subscribe((res: HttpRequestResult<any>) => {
-        console.log(res.data.publicKey);
-        console.log(this.password.value);
         const user = new User({
           userName: this.userName.value,
           password: this.utilService.encryptData(res.data.publicKey, this.password.value)
@@ -87,8 +87,7 @@ export class SigninComponent {
    * @returns Void.
    */
   private handleLogin(user: User): void {
-    console.log(user);
-    this.authService.signin(user)
+    this.canLoadingService.handleLoad(this.authService.signin(user))
       .subscribe((res: HttpRequestResult<Token>) => {
         this.authService.storeCanTokens(res.data);
         this.router.navigate(['can/home']);

@@ -1,8 +1,71 @@
-<div class="can-page">
+<div class="can-page can-container-column-center">
 
-    <div class="can-page-card">
+    <div *ngIf="listVideos.length > 0" class="can-page-card">
 
-        <p>home works!</p>
+        <div *ngFor="let video of listVideos" class="can-container-column-center card-video">
+
+            <div class="header-video">
+
+                <div class="can-container-row">
+
+                    <ngx-avatar name="{{video.user.name}} {{video.user.lastName}}" [src]="video.user.avatarUrl"
+                        size="40">
+                    </ngx-avatar>
+
+                    <div class="can-container-column">
+
+                        <label class="label-video-header">{{video.user.name}} {{video.user.lastName}}</label>
+
+                        <label class="label-video-header">{{video.user.email}}</label>
+
+                    </div>
+
+                </div>
+
+                <div class="can-container-column">
+
+                    <label class="label-header-right">Title - {{video.title}}</label>
+
+                    <label class="label-header-right">Artist - {{video.artist}}</label>
+
+                </div>
+
+            </div>
+
+            <div id="containerVideo{{video.id}}" class="container-video">
+
+                <button class="can-button-play-video" (click)="playVideo(video)">►</button>
+
+            </div>
+
+            <div class="footer-video-column">
+
+                <div class="footer-video">
+
+                    <label class="label-footer">Comments:</label>
+                    
+                    <label class="label-footer">Date: {{video.uploadDate | date: 'dd/MM/yyyy'}}</label>
+                    
+                </div>
+
+                <div class="can-container-row-center">
+
+                    <input id="inputComment{{video.id}}" class="input-comment" />
+
+                    <button class="can-button-white" style="font-weight: 600;" (click)="commentVideo(video)">Comment</button>
+                    
+                </div>
+                <p class="attention-comment">Max 150 characters.</p>
+                
+                <p *ngFor="let comment of video.comments" class="container-comment">
+                    {{comment}}
+                </p>
+
+                <p *ngIf="video.comments.length <= 0" class="container-comment">No comments have been done yet.</p>
+                
+            </div>
+
+        </div>
 
     </div>
 

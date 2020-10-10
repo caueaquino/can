@@ -5,7 +5,7 @@
 
         <div class="can-container-profile">
             <div class="can-container-profile-avatar">
-                <ngx-avatar name="{{name.value}} {{lastName.value}}" [src]="avatarUrl.value" borderColor="black" size="250"></ngx-avatar>
+                <ngx-avatar name="{{name.value}} {{lastName.value}}" src="{{avatarUrl.value}}" borderColor="black" size="250"></ngx-avatar>
             </div>
 
             <div class="can-container-column-end">
@@ -17,9 +17,9 @@
                 <label class="can-label">
                     Language:
                     <select formControlName="language" class="can-input">
-                        <option [ngValue]="1">Portugues (Brasil)</option>
-                        <option [ngValue]="2">English (USA)</option>
-                        <option [ngValue]="3">Spanish</option>
+                        <option value="1">Portugues (Brasil)</option>
+                        <option value="2">English (USA)</option>
+                        <option value="3">Spanish</option>
                     </select>
                 </label>
             </div>

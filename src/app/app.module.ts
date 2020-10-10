@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AvatarModule } from 'ngx-avatar';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 
 import { AppComponent } from 'src/app/app.component';
@@ -21,6 +22,7 @@ import { RecoverPasswordComponent } from 'src/app/modules/pages/recover-password
 import { TokenInterceptor } from 'src/app/core/interceptors/token.interceptor';
 import { ErrorInterceptor } from 'src/app/core/interceptors/error.interceptor';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { SafePipe } from 'src/app/shared/pipes/safe.pipe';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     CanLoadingComponent,
     CanDialogComponent,
     ProfileComponent,
-    VideosComponent
+    VideosComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     PasswordStrengthMeterModule,
     BrowserAnimationsModule,
     AvatarModule,
+    NgxSpinnerModule,
   ],
   providers:  [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { UserService } from 'src/app/core/services/user.service';
-import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
 import { User } from 'src/app/shared/models/user.model';
+import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
+import { CanloadingService } from 'src/app/modules/components/can-loading/can-loading.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
+    private canLoadingService: CanloadingService,
   ) {
     this.userData.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.userForm = this.formBuilder.group({
@@ -105,7 +107,7 @@ export class ProfileComponent implements OnInit {
    * @returns Void.
    */
   public loadProfileData(): void {
-    this.userService.getUserById(this.userData.id)
+    this.canLoadingService.handleLoad(this.userService.getUserById(this.userData.id))
       .subscribe((res: HttpRequestResult<User>) => {
         this.userData = res.data;
         this.userForm.patchValue(this.userData);

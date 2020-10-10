@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgxSpinnerService } from 'ngx-spinner';
+
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'can-loading',
@@ -8,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CanLoadingComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private spinner: NgxSpinnerService,
+  ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
   }
-
+  
 }
