@@ -41,6 +41,7 @@
             <label class="can-label">
                 Email:
                 <input placeholder="Email" formControlName="email" class="can-input" />
+                <p *ngIf="email?.errors?.emailDomain" style="color: red;">Email must be on the alunos.utfpr.edu.br domain</p>
             </label>
 
             <label class="can-label">

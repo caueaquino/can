@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { User } from 'src/app/shared/models/user.model';
 import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
+import { emailDomainValidator } from 'src/app/shared/validators/email-domail.validator';
 import { CanloadingService } from 'src/app/modules/components/can-loading/can-loading.service';
 import { CanDialogService } from 'src/app/modules/components/can-dialog/can-dialog.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -33,7 +34,7 @@ export class ProfileComponent implements OnInit {
       name: [null, [Validators.required]],
       lastName: [null, Validators.required],
       password: [null, [Validators.required, Validators.minLength(6)]],
-      email: [null, [Validators.required]],
+      email: [null, [Validators.required, emailDomainValidator]],
       avatarUrl: [null, []],
       language: [null, [Validators.required]]
     });
