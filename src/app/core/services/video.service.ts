@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay, map, switchMap } from 'rxjs/operators';
 
 import { Videos } from 'src/app/shared/models/videos.model';
 import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class VideoService {
 
-    private readonly BASE_URL = `assets/mocks/`;
+    private readonly BASE_URL = `${environment.apiUrl}videos.json`;
+    // private readonly BASE_URL = `assets/mocks/`;
 
     constructor(
         private http: HttpClient,
@@ -23,13 +25,12 @@ export class VideoService {
      * @returns Return an Observeble of HttpRequestResult model with video data into it if request was success.
      */
     public getVideoById(videoId: number): Observable<HttpRequestResult<Videos>> {
-        const url = `${this.BASE_URL}user-list.json`;
+        const url = `${this.BASE_URL}`;
         return this.http.get<HttpRequestResult<any>>(url)
             .pipe(map(res => {
                 res.data = res.data.find(video => video.id === videoId);
                 return res;
-            }),
-            delay(1000));
+            }));
     }
 
     /**
@@ -37,8 +38,11 @@ export class VideoService {
      * @returns Return an Observable of HttpRequestResult model with video list data into it.
      */
     public getVideos(): Observable<HttpRequestResult<Array<Videos>>> {
-        const url = `${this.BASE_URL}posts.json`;
-        return this.http.get<HttpRequestResult<Array<Videos>>>(url).pipe(delay(1000));
+        const url = `${this.BASE_URL}`;
+        return this.http.get<HttpRequestResult<Array<Videos>>>(url).pipe(map((res => {
+            res.data = res.data.reverse();
+            return res;
+        })));
     }
 
     /**
@@ -48,6 +52,16 @@ export class VideoService {
      */
     public addVideo(video: Videos): Observable<HttpRequestResult<any>> {
         const url = `${this.BASE_URL}`;
-        return this.http.post<HttpRequestResult<any>>(url, video);
+        return this.getVideos().pipe(
+            switchMap((res: HttpRequestResult<Array<Videos>>) => {
+                video = Object.assign(video, { id: res.data.length + 1 });
+                res.data.push(video);
+                return this.http.put<any>(url, res);
+            }));
+    }
+
+    public updateVideos(videos: Array<Videos>): Observable<any> {
+        const url = `${this.BASE_URL}`;
+        return this.http.put<any>(url, { data: videos, message: 'success', status: 0 });
     }
 }

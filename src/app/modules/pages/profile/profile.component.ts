@@ -128,8 +128,14 @@ export class ProfileComponent implements OnInit {
       return;
     }
     this.userData = this.userForm.getRawValue() as User;
-    this.canDialog.openDialog('Success', 'Profile data was updated successfully.');
-    this.changeFormState();
+    this.canLoadingService.handleLoad(this.userService.updateUser(this.userData))
+      .subscribe((res: any) => {
+        this.canDialog.openDialog('Success', 'Profile data was updated successfully.');
+        this.changeFormState();
+      }, (error: HttpErrorResponse) => {
+        this.canDialog.openDialog('Error', 'Error when trying to update profile data.');
+        console.error(error);
+      });
   }
 
   /**

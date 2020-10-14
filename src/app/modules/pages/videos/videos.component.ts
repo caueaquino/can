@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,6 +9,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { VideoService } from 'src/app/core/services/video.service';
 import { CanDialogService } from 'src/app/modules/components/can-dialog/can-dialog.service';
 import { CanloadingService } from 'src/app/modules/components/can-loading/can-loading.service';
+import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class VideosComponent implements OnInit {
     private userService: UserService,
     private canLoadingService: CanloadingService,
     private canDialogService: CanDialogService,
+    private router: Router,
   ) {
     this.videoForm = this.formBuilder.group({
       title: [null, Validators.required],
@@ -75,16 +78,20 @@ export class VideosComponent implements OnInit {
     this.canLoadingService.handleLoad(this.videoService.addVideo(newVideo))
       .subscribe(() => {
         this.canDialogService.openDialog('Success', 'Video was posted successfully');
+        setTimeout(() => {
+          this.router.navigate(['home']);
+        }, 3000);
         this.resetFormState();
       }, (error: HttpErrorResponse) => {
         console.error(error);
+        this.canDialogService.openDialog('Error', 'Error when trying to save the video');
       });
   }
 
   private setCreationUser(): void {
     this.canLoadingService.handleLoad(this.userService.getUserById(1))
-      .subscribe((user: User) => {
-        this.user.setValue(user);
+      .subscribe((res: HttpRequestResult<User>) => {
+        this.user.setValue(res.data);
       }, (error: HttpErrorResponse) => {
         console.error(error);
       });

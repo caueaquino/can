@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Videos } from 'src/app/shared/models/videos.model';
 import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
 import { CanloadingService } from 'src/app/modules/components/can-loading/can-loading.service';
+import { CanDialogService } from 'src/app/modules/components/can-dialog/can-dialog.service';
 import { VideoService } from 'src/app/core/services/video.service';
 
 
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private videoService: VideoService,
     private canLoadingService: CanloadingService,
+    private canDialogService: CanDialogService,
   ) { }
 
   public ngOnInit(): void {
@@ -44,8 +46,18 @@ export class HomeComponent implements OnInit {
   }
 
   private setCommentValue(input: any, video: Videos): void {
+    if (!video.comments) {
+      video = Object.assign(video, { comments: [] });
+    }
     video.comments.push(input.value);
     input.value = '';
+    this.videoService.updateVideos(this.listVideos)
+      .subscribe((res: any) => {
+
+      }, (error: HttpErrorResponse) => {
+        this.canDialogService.openDialog('Error', 'Error when trying to save comment on database.');
+        console.error(error);
+      });
   }
 
 }

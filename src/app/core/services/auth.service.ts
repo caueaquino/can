@@ -9,6 +9,7 @@ import { User } from 'src/app/shared/models/user.model';
 import { Token } from 'src/app/shared/models/token.model';
 import { HttpRequestResult } from 'src/app/shared/models/http-request-result.model';
 import { UtilService } from 'src/app/core/services/util.service';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
@@ -17,6 +18,7 @@ export class AuthService {
     private readonly ACCESS_TOKEN = 'CAN_TOKEN';
     private readonly REFRESH_TOKEN = 'CAN_REFRESH_TOKEN';
     private readonly BASE_URL = `assets/mocks/`;
+    // private readonly BASE_URL = `${environment.apiUrl}user`;
 
 
     constructor(
